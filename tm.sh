@@ -156,7 +156,7 @@ rename_session() {
 
   for arg; do
     case "${arg}" in
-      -h | --help) help_open ;;
+      -h | --help) help_rename ;;
       -*) err "Unknown option $1" ;;
     esac
   done
