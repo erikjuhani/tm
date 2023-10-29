@@ -125,13 +125,6 @@ close_session() {
 open_session() {
   [ "$#" -gt 1 ] && err "Too many arguments provided, use \`tm open <session_path>\`"
 
-  for arg; do
-    case "${arg}" in
-      -h | --help) help_open ;;
-      -*) err "Unknown option $1" ;;
-    esac
-  done
-
   [ -z "$1" ] && session="$(basename "$(pwd)")" || session="$(basename "$1")"
 
   if ! has_session "${session}" 2>/dev/null; then
@@ -146,6 +139,13 @@ get_existing_sessions() {
 }
 
 session_opener() {
+  for arg; do
+    case "${arg}" in
+      -h | --help) help_open ;;
+      -*) err "Unknown option $1" ;;
+    esac
+  done
+
   session="$(printf "%s%s" "$(get_existing_sessions)" "$(zoxide query -l)" | fzf --reverse)"
   open_session "${session}"
   exit 0
