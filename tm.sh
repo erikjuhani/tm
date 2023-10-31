@@ -146,7 +146,7 @@ session_opener() {
     esac
   done
 
-  session="$(printf "%s%s" "$(get_existing_sessions)" "$(zoxide query -l)" | fzf --reverse)"
+  session="$(printf "%s\n%s" "$(get_existing_sessions)" "$(zoxide query -l)" | fzf --reverse)"
   open_session "${session}"
   exit 0
 }
