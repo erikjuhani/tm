@@ -152,7 +152,11 @@ session_opener() {
 }
 
 rename_session() {
-  [ -z "$1" ] && err "No session name given"
+  new_session_name="$1"
+  [ -z "${new_session_name}" ] && {
+    working_directory="$(pwd)"
+    new_session_name="${working_directory##*/}"
+  }
 
   for arg; do
     case "${arg}" in
@@ -161,7 +165,7 @@ rename_session() {
     esac
   done
 
-  tmux rename-session "$1"
+  tmux rename-session "${new_session_name}"
   exit 0
 }
 
