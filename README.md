@@ -79,8 +79,9 @@ tm close [<session_name>]
 
 ### Rename
 
-Rename the current session with the given new name.
+Rename the current tmux session with the provided new name, or alternatively,
+use the basename of the current working directory.
 
 ```
-tm rename <new_session_name>
+tm rename [<new_session_name>]
 ```

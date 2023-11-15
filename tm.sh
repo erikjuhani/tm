@@ -81,10 +81,11 @@ EOF
 help_rename() {
   cat <<EOF
 tm rename
-Rename the current session with the given new name.
+Rename the current tmux session with the provided new name, or alternatively,
+use the basename of the current working directory.
 
 USAGE
-	rename <new_session_name>
+	rename [<new_session_name>]
 
 OPTIONS
 	-h --help	Show help
