@@ -139,6 +139,10 @@ get_existing_sessions() {
   tmux ls | sed 's/:.*$//' | sed 's/^/session:\/\//'
 }
 
+fzf_preview() {
+  fzf --reverse --preview="printf '%s' {} | sed 's/session:\\/\\///' | xargs tmux capture-pane -p -t | cat"
+}
+
 session_opener() {
   for arg; do
     case "${arg}" in
@@ -147,7 +151,7 @@ session_opener() {
     esac
   done
 
-  session="$(printf "%s\n%s" "$(get_existing_sessions)" "$(zoxide query -l)" | fzf --reverse)"
+  session="$(printf "%s\n%s" "$(get_existing_sessions)" "$(zoxide query -l)" | fzf_preview)"
   open_session "${session}"
   exit 0
 }
